@@ -11,6 +11,7 @@ import java.io.FileReader;
 
 /**
  * Created by zakar on 03/12/14.
+ * http://www.oracle.com/technetwork/articles/java/jf14-nashorn-2126515.html
  * http://stackoverflow.com/questions/19500141/how-can-i-use-commonjs-modules-with-oracles-new-nashorn-js-engine
  *
  * TODO: We propably want to offer some js-functions for writing the response from js
