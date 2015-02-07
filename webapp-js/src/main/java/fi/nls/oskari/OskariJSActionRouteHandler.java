@@ -43,7 +43,6 @@ public class OskariJSActionRouteHandler {
 
     @PostConstruct
     public void initRoutes() {
-        log.debug("\n\n\nJS INIT ROUTES\n\n\n");
         // TODO: PATH_TO_SCRIPTS needs to be monitored for changes:
         // - file change == replace/re-init action handler
         // - file removal == route removal
@@ -51,7 +50,7 @@ public class OskariJSActionRouteHandler {
 
         Map<String, String> paths = getRoutes();
         for (String p : paths.keySet()) {
-            log.debug("Path:", p);
+            log.debug("Adding JS action route with name:", p);
             JSActionHandler handler = new JSActionHandler(p, paths.get(p));
             ActionControl.addAction(p, handler);
         }
