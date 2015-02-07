@@ -1,8 +1,10 @@
-package fi.zakar.oskari.js;
+package fi.nls.oskari;
 
 import fi.nls.oskari.control.ActionControl;
-import fi.nls.oskari.control.ActionParameters;
+import fi.nls.oskari.log.LogFactory;
+import fi.nls.oskari.log.Logger;
 import fi.nls.oskari.util.PropertyUtil;
+import fi.zakar.oskari.js.JSActionHandler;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +22,8 @@ import java.util.Map;
  */
 @Configuration
 public class OskariJSActionRouteHandler {
+
+    private Logger log = LogFactory.getLogger(OskariJSActionRouteHandler.class);
 
     private String PATH_TO_SCRIPTS = PropertyUtil.getOptional("oskari.extension.js.actionroutes.dir");
 
@@ -39,6 +43,7 @@ public class OskariJSActionRouteHandler {
 
     @PostConstruct
     public void initRoutes() {
+        log.debug("\n\n\nJS INIT ROUTES\n\n\n");
         // TODO: PATH_TO_SCRIPTS needs to be monitored for changes:
         // - file change == replace/re-init action handler
         // - file removal == route removal
@@ -46,6 +51,7 @@ public class OskariJSActionRouteHandler {
 
         Map<String, String> paths = getRoutes();
         for (String p : paths.keySet()) {
+            log.debug("Path:", p);
             JSActionHandler handler = new JSActionHandler(p, paths.get(p));
             ActionControl.addAction(p, handler);
         }
